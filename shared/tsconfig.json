@@ -1,0 +1,28 @@
+{
+    "extends": "../tsconfig.json",
+    "compilerOptions": {
+        "rootDir": "src",
+        "outDir": "dist",
+
+        "target": "ESNext",
+        "module": "NodeNext",
+        "lib": ["ESNext"],
+        "declaration": true,
+		"sourceMap": true, 
+
+        "typeRoots": ["types"],
+        "types": [],
+
+        "baseUrl": ".",
+        "paths": {
+            "$types/*": ["./types/*"],
+        },
+
+        "skipLibCheck": true,
+        "allowSyntheticDefaultImports": true,
+
+        "moduleResolution": "nodenext"
+    },
+
+    "exclude": [ "node_modules", "types", "dist", "scripts" ]
+}

@@ -1,0 +1,8 @@
+# Dependencies and Artifacts
+node_modules
+dist
+link
+
+# Build files
+.build.meta
+tsconfig.tsbuildinfo

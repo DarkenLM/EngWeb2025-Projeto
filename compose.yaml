@@ -1,0 +1,50 @@
+name: EW_Project
+
+services:
+  api:
+    build: ./api
+    container_name: EW_Project-api
+    ports:
+      - "16000:16000"
+    depends_on:
+      - mongo
+    environment:
+      MONGO_URI: "mongodb://mongo:27017/contratos"
+      PORT: 16000
+    volumes:
+      - ./shared:/app/link/shared
+    networks:
+      - ew-net
+
+  mongo:
+    build: ./db
+    container_name: EW_Project-db
+    environment:
+      - RUN_DB_STARTUP_SCRIPT=${RUN_DB_STARTUP_SCRIPT:-123}
+    ports:
+      - "27018:27017"
+    volumes:
+      - mongoData2025:/data/db
+    networks:
+      - ew-net
+
+  web:
+    build: ./web
+    container_name: EW_Project-web
+    ports:
+      - "16001:16001"
+    depends_on:
+      - api
+    environment:
+      API_URI: "http://api:16000/contratos"
+      PORT: 16001
+    volumes:
+      - ./shared:/app/link/shared
+    networks:
+      - ew-net
+
+networks:
+  ew-net:
+
+volumes:
+  mongoData2025:
